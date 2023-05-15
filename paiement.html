@@ -457,6 +457,79 @@
         <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-7" src="images/5aa78e267603fc558cffbf1a.png" alt="" data-image-width="400" data-image-height="400">
         <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-8" src="images/5aa78e267603fc558cffbf1a.png" alt="" data-image-width="400" data-image-height="400">
       </div>
+      <div class="bouton"><!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>PayPal SDK Python Demo <test></title>
+          </head>
+          <body>
+            <script data-sdk-integration-source="integrationbuilder_ac"></script>
+            <div id="paypal-button-container"></div>
+            <script src="https://www.paypal.com/sdk/js?client-id=AV4-P3YzoCPHFbt4eNCUBo9vnws9hB8e3ZljE6UdvfcTGWSUWLsCU856NhObCaql3eNIIX_cr1Oec4RS"></script>
+            <script>
+              const FUNDING_SOURCES = [
+                paypal.FUNDING.PAYPAL,
+                paypal.FUNDING.PAYLATER,
+                paypal.FUNDING.VENMO,
+                paypal.FUNDING.CARD
+              ];
+              FUNDING_SOURCES.forEach(fundingSource => {
+                paypal.Buttons({
+                  fundingSource,
+                  style: {
+                    layout: 'vertical',
+                    shape: 'pill',
+                    color: (fundingSource==paypal.FUNDING.PAYLATER) ? 'gold' : '',
+                  },
+                  createOrder: async (data, actions) => {
+                    const response = await fetch("/orders", {
+                      method: "POST",
+                    });
+                    const details = await response.json();
+                    return details.id;
+                  },
+                  
+                  onApprove: async (data, actions) => {
+                    const response = await fetch(`/orders/${data.orderID}/capture`, {
+                      method: "POST",
+                    });
+                    const details = await response.json();
+                    // Three cases to handle:
+                    //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+                    //   (2) Other non-recoverable errors -> Show a failure message
+                    //   (3) Successful transaction -> Show confirmation or thank you
+        
+                    // This example reads a v2/checkout/orders capture response, propagated from the server
+                    // You could use a different API or structure for your 'orderData'
+        
+                    const errorDetail = Array.isArray(details.details) && details.details[0];
+                    if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
+                      return actions.restart(); // Recoverable state, per:
+                      // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                    }
+        
+                    if (errorDetail) {
+                      let msg = 'Sorry, your transaction could not be processed.';
+                      if (errorDetail.description) msg += '\n\n' + errorDetail.description;
+                      if (details.debug_id) msg += ' (' + details.debug_id + ')';
+                      return alert(msg); // Show a failure message (try to avoid alerts in production environments)
+                    }
+        
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', details, JSON.stringify(details, null, 2));
+                    const transaction = details.purchase_units[0].payments.captures[0];
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                  },
+                })
+                .render("#paypal-button-container");
+               })
+        
+            </script>
+          </body>
+        </html>
+              </div>
     </section>
     <section class="u-clearfix u-image u-shading u-section-3" id="carousel_8f73" data-image-width="720" data-image-height="1080">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
@@ -1104,27 +1177,3 @@
         </div>
       </div>
     </section>
-    
-    
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-0108"><div class="u-clearfix u-sheet u-sheet-1"></div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-design" target="_blank">
-      </a>
-      <p class="u-text">
-      </p>
-      <a class="u-link" href="https://nicepage.cc" target="_blank">
-      </a>
-    </section>
-  
-      <div class="element-en-dessous">
-          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="LXGYQHKK3DSP4">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
-            <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="3" height="3">
-            </form>
-          </div>
-    </div>
-    
-
-</body></html>

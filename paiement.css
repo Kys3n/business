@@ -425,3 +425,8 @@
   left: 850px;
   bottom: 2200px;
 }
+.bouton {
+  position:absolute;
+  bottom: 300px;
+  left: 950px;
+}
