@@ -426,7 +426,16 @@
   bottom: 2200px;
 }
 .bouton {
-  position:absolute;
-  bottom: 300px;
-  left: 950px;
+  position: absolute;
+  left: 1000px;
+  bottom: 350px;
 }
+
+@media (max-width: 767px) { /* Pour les écrans de taille maximale de 767px (version mobile) */
+  .bouton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
