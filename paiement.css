@@ -433,9 +433,9 @@
 
 @media (max-width: 767px) { /* Pour les écrans de taille maximale de 767px (version mobile) */
   .bouton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    position: absolute;
+    top: 100px;;
+    right: (300)px;
   }
 }
 
