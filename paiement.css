@@ -427,15 +427,34 @@
 }
 .bouton {
   position: absolute;
-  left: 1000px;
-  bottom: 350px;
+  left: 950px;
 }
 
-@media (max-width: 767px) { /* Pour les écrans de taille maximale de 767px (version mobile) */
+@media (max-width: 767px) {
+  /* Styles pour les petits écrans (mobiles en mode portrait) */
   .bouton {
-    position: absolute;
-    bottom: 100px;
-    left: 700px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    left: auto;
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Styles pour les écrans de taille moyenne (tablettes en mode portrait) */
+  .bouton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    left: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Styles pour les écrans larges (ordinateurs de bureau) */
+  .bouton {
+    position: absolute;
+    bottom: 300px;
+    left: 950px;
+  }
+}
