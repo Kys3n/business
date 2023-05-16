@@ -428,33 +428,5 @@
 .bouton {
   position: absolute;
   left: 950px;
-}
-
-@media (max-width: 767px) {
-  /* Styles pour les petits écrans (mobiles en mode portrait) */
-  .bouton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    left: auto;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Styles pour les écrans de taille moyenne (tablettes en mode portrait) */
-  .bouton {
-    position: absolute;
-    bottom: auto;
-    right: auto;
-    left: auto;
-  }
-}
-
-@media (min-width: 1024px) {
-  /* Styles pour les écrans larges (ordinateurs de bureau) */
-  .bouton {
-    position: absolute;
-    bottom: auto;
-    left: auto;
-  }
+  bottom: 300px;
 }
