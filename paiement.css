@@ -427,6 +427,18 @@
 }
 .bouton {
   position: absolute;
-  left: 950px;
-  bottom: 300px;
+  bottom: 30%;
+  left: 75%;
+  transform: translate(-50%, 0);
 }
+
+/* Média requête pour les petits écrans */
+@media (max-width: 767px) {
+  .bouton {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+  }
+}
+
