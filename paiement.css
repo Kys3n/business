@@ -444,8 +444,8 @@
   /* Styles pour les écrans de taille moyenne (tablettes en mode portrait) */
   .bouton {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: auto;
+    right: auto;
     left: auto;
   }
 }
@@ -454,7 +454,7 @@
   /* Styles pour les écrans larges (ordinateurs de bureau) */
   .bouton {
     position: absolute;
-    bottom: 300px;
-    left: 950px;
+    bottom: auto;
+    left: auto;
   }
 }
