@@ -1219,7 +1219,8 @@ footer {
 }
 
 .mentions-legales,
-.politique-confidentialite {
+.politique-confidentialite,
+.conditions-utilisation {
   margin-bottom: 10px;
 }
 
@@ -1227,3 +1228,4 @@ a {
   color: #333;
   text-decoration: underline;
 }
+
