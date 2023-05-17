@@ -324,3 +324,12 @@
     min-height: 452px;
   }
 }
+
+
+  .mail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
