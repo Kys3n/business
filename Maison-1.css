@@ -1211,3 +1211,19 @@
     min-height: 452px;
   }
 }
+
+footer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+}
+
+.mentions-legales,
+.politique-confidentialite {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #333;
+  text-decoration: underline;
+}
